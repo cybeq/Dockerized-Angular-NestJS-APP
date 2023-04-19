@@ -1,0 +1,10 @@
+<div class="form-container">
+  <form [formGroup]="taskForm" #actionForms>
+    <select formControlName="status">
+      <option *ngFor="let s of status" [value]="s._id">{{s.name}}</option>
+    </select>
+    <input type="text" placeholder="Nazwa zadania" formControlName="name">
+    <input type="text" placeholder="Treść" formControlName="description">
+    <button (click)="submitTask()">Zatwierdź</button>
+  </form>
+</div>

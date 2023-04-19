@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./backend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    networks:
+      - app_network
+
+  app:
+    build:
+      context: ./client
+    ports:
+      - '4200:4200'
+    depends_on:
+      - api
+    networks:
+      - app_network
+
+  mongodb:
+    build:
+      context: .
+    ports:
+      - '27017:27017'
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

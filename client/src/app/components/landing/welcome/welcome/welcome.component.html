@@ -1,0 +1,11 @@
+<h1>Welcome! It looks like you are not logged in...</h1>
+<div class="action_buttons_container">
+  <button routerLink="signin">Zaloguj się</button><button routerLink="signup">Załóż nowe konto</button>
+</div>
+<section class="action_forms"   #actionForms>
+<router-outlet ></router-outlet>
+</section>
+
+<section class="error" #errorPopup>
+  <div><strong>{{errorCode}}</strong> {{errorMessage}}</div>
+</section>
