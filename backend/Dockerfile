@@ -6,6 +6,8 @@ COPY package*.json ./
 
 RUN npm install --production
 
+RUN rm -rf node_modules/bcrypt && npm install bcrypt && npm rebuild bcrypt
+
 COPY . .
 
 RUN npm run build
