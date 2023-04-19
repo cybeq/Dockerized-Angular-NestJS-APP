@@ -29,10 +29,10 @@ export class TaskService {
         try{
             task = await this.taskModel.findOne({_id});
         }catch(e){
-            throw new NotFoundException({context:"task", description:"task does not exist"});
+            throw new NotFoundException();
             // 404
         }
-        if(!task) throw new NotFoundException({context:"task", description:"task does not exist"});
+        if(!task) throw new NotFoundException();
         //404
         await this.taskModel.deleteOne({_id})
         return true;
@@ -42,10 +42,10 @@ export class TaskService {
         try {
             task = await this.taskModel.findOne({_id}) as Task;
         }catch(e){
-            throw new NotFoundException({context:"task", message:`Task with id ${_id} not found`});
+            throw new NotFoundException();
             // 404
         }
-        if(!task)   throw new NotFoundException({context:"task", message:`Task with id ${_id} not found`}); //404
+        if(!task)   throw new NotFoundException(); //404
         try {
             task.name = updatedTask.name;
             task.description = updatedTask.description
@@ -54,7 +54,7 @@ export class TaskService {
             if(updatedTask.status) task.status = updatedTask.status
             task.save();
         }catch(e){
-            throw new BadRequestException({context:"task", message:"Invalid props"})
+            throw new BadRequestException()
             //400
         }
         return this.taskModel.findOne(task.toObject()).populate('status').populate('user').populate('updateUser');
